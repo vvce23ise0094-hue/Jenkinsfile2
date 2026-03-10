@@ -12,7 +12,7 @@ pipeline {
 
     stage('Run Python') {
       steps {
-        py 'chmod +x'
+        py 'chmod +x python.py'
         py './python.py'
       }
     }
