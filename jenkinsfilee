@@ -3,18 +3,37 @@ pipeline {
 
   stages {
     
-    stage('clone') {
+    stage('Clone') {
       steps {
-        git url: 'https://github.com/vvce23ise0094-hue/Jenkinsfile2.git',
-          branch: 'main'
+        git url: 'https://github.com/vvce23ise0094-hue/jenkinsdemo.git',
+            branch: 'main'
       }
     }
 
-    stage('Run Python script') {
+    stage('Setup Python Environment') {
       steps {
-        py 'chmod +x file2.py'
-        py './file2.py'
+        sh '''
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+        '''
       }
+    }
+
+    stage('Run Script') {
+      steps {
+        sh '''
+          . venv/bin/activate
+          python3 script.py
+        '''
+      }
+    }
+  }
+
+  post {
+    always {
+      cleanWs()
     }
   }
 }
