@@ -10,9 +10,9 @@ pipeline {
       }
     }
 
-    stage('Run python') {
+    stage('Run Python') {
       steps {
-        py 'chmod +x python.py'
+        py 'chmod +x'
         py './python.py'
       }
     }
